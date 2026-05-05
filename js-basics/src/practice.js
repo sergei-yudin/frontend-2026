@@ -11,13 +11,16 @@
  * @returns {string}
  */
 export function greet(name) {
-  // TODO: верни строку "Привет, {name}!"
+    // TODO: верни строку "Привет, {name}!"
+    if ( typeof name !== 'string' || name.trim() === '' ) {
+        throw new Error('name пустой');
+    }
+    return `Привет, ${name}!`;
   // Если name не строка или пустая — выброси ошибку
   // Полезно: https://learn.javascript.ru/function-basics
   //          https://learn.javascript.ru/variables
-  throw new Error('greet не реализована');
+  // throw new Error('greet не реализована');
 }
-
 /**
  * Возвращает сумму двух чисел.
  * @param {number} a
@@ -26,8 +29,9 @@ export function greet(name) {
  */
 export function sum(a, b) {
   // TODO: верни сумму a и b
+    return (a + b);
   // Полезно: https://learn.javascript.ru/operators
-  throw new Error('sum не реализована');
+  // throw new Error('sum не реализована');
 }
 
 /**
@@ -37,8 +41,9 @@ export function sum(a, b) {
  */
 export function double(x) {
   // TODO: верни x, умноженное на 2
+    return (x * 2);
   // Полезно: https://learn.javascript.ru/operators
-  throw new Error('double не реализована');
+  // throw new Error('double не реализована');
 }
 
 // --- Тема 2: Условия if/else ---
@@ -50,10 +55,16 @@ export function double(x) {
  */
 export function isPositive(number) {
   // TODO: верни true, если number > 0, иначе false
+        if (typeof number !== 'number') {
+            throw new Error('Number не является числом');
+        }
+        return (number > 0)
+
+
   // Если number не число — выброси ошибку
   // Полезно: https://learn.javascript.ru/ifelse
   //          https://learn.javascript.ru/types
-  throw new Error('isPositive не реализована');
+  // throw new Error('isPositive не реализована');
 }
 
 /**
@@ -64,9 +75,14 @@ export function isPositive(number) {
  */
 export function getMax(a, b) {
   // TODO: верни большее из двух чисел
+    if (typeof a !== 'number' || typeof b !== 'number') {
+        throw new Error('Аргумент a не является числом');
+    }
+    return ((a > b) ? a :
+        (a < b) ? b: a)
   // Если хотя бы один аргумент не число — выброси ошибку
   // Полезно: https://learn.javascript.ru/ifelse
-  throw new Error('getMax не реализована');
+  // throw new Error('getMax не реализована');
 }
 
 // --- Тема 3: Сравнение чисел (основа для "Угадай число") ---
@@ -79,10 +95,16 @@ export function getMax(a, b) {
  */
 export function compareNumbers(a, b) {
   // TODO: верни 'greater' если a > b, 'less' если a < b, 'equal' если равны
+    if (typeof a !== 'number' || typeof b !== 'number') {
+        throw new Error('Данное значение не является числом');
+    }
+    return (a > b) ? "greater":
+        (a < b) ? "less":
+            (a = b) ? "equal": false
   // Если хотя бы один аргумент не число — выброси ошибку
   // Полезно: https://learn.javascript.ru/ifelse
   //          https://learn.javascript.ru/operators
-  throw new Error('compareNumbers не реализована');
+  // throw new Error('compareNumbers не реализована');
 }
 
 // --- Тема 4: Массивы и случайный выбор (основа для "Камень, ножницы, бумага") ---
@@ -94,10 +116,15 @@ export function compareNumbers(a, b) {
  */
 export function getRandomElement(items) {
   // TODO: верни случайный элемент из массива items
+if (!Array.isArray(items) || items.length === 0) {
+    throw new Error('Items пуст');
+}
+const randomIndex = Math.floor(Math.random() * items.length);
+return items[randomIndex];
   // Если items не массив или пустой — выброси ошибку
   // Полезно: https://learn.javascript.ru/array
   //          https://learn.javascript.ru/operators
-  throw new Error('getRandomElement не реализована');
+  // throw new Error('getRandomElement не реализована');
 }
 
 /**
@@ -108,9 +135,13 @@ export function getRandomElement(items) {
  */
 export function contains(items, item) {
   // TODO: верни true, если item есть в массиве items, иначе false
+if (!Array.isArray(items) ) {
+    throw new Error('Это не массив');
+}
+return items.includes(item)
   // Если items не массив — выброси ошибку
   // Полезно: https://learn.javascript.ru/array-methods
-  throw new Error('contains не реализована');
+  // throw new Error('contains не реализована');
 }
 
 // --- Тема 5: Проверка данных (валидация) ---
@@ -123,7 +154,11 @@ export function contains(items, item) {
 export function isValidInteger(value) {
   // TODO: верни true, если value — целое число (number и Number.isInteger), иначе false
   // Полезно: https://learn.javascript.ru/types
-  throw new Error('isValidInteger не реализована');
+    if (typeof value !== 'number') {
+        return false;
+    }
+    return Number.isInteger(value)
+
 }
 
 // --- Тема 6: Объекты ---
