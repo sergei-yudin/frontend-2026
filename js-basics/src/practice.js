@@ -172,12 +172,16 @@ export function isValidInteger(value) {
  */
 export function createPerson(firstName, lastName, age) {
   // TODO: верни объект { firstName, lastName, age }
+    if (!firstName || !lastName || !Number.isInteger(age) || age <= 0) {
+        throw new Error('Забыли ввести firstName или lastName');
+    }
+    return {firstName, lastName, age}
   // firstName и lastName должны быть непустыми строками
   // age должен быть целым числом >= 0
   // Иначе — выброси ошибку
   // Полезно: https://learn.javascript.ru/object
   //          https://learn.javascript.ru/ifelse
-  throw new Error('createPerson не реализована');
+  // throw new Error('createPerson не реализована');
 }
 
 /**
@@ -187,10 +191,15 @@ export function createPerson(firstName, lastName, age) {
  */
 export function getFullName(person) {
   // TODO: верни строку "{firstName} {lastName}"
+    if (!person || typeof person.firstName !== 'string' || typeof person.lastName !== 'string') {
+        throw new Error('firstName и lastName не являются строками');
+    }
+    return (`${person.firstName} ${person.lastName}`)
+
   // person должен быть объектом с полями firstName и lastName (строки)
   // Иначе — выброси ошибку
   // Полезно: https://learn.javascript.ru/object
-  throw new Error('getFullName не реализована');
+  // throw new Error('getFullName не реализована');
 }
 
 // --- Тема 7: Составные условия (основа для "Камень, ножницы, бумага") ---
@@ -205,12 +214,20 @@ const VALID_CHOICES = ['rock', 'paper', 'scissors'];
  */
 export function canBeat(attacker, defender) {
   // TODO: верни true, если attacker побеждает defender по правилам:
+    if (!VALID_CHOICES.includes(attacker) || !VALID_CHOICES.includes(defender)) {
+        throw new Error('Условия не реализованы');
+    } else if ( attacker === defender ) {
+        return false
+    } else if ( attacker > defender ) {
+        return true
+    }
+    return false
   // rock > scissors, scissors > paper, paper > rock
   // Если один из аргументов не из VALID_CHOICES — выброси ошибку
   // Если одинаковые — верни false (ничья не считается победой)
   // Полезно: https://learn.javascript.ru/ifelse
   //          https://learn.javascript.ru/logical-operators
-  throw new Error('canBeat не реализована');
+  // throw new Error('canBeat не реализована');
 }
 
 // Если запустить файл напрямую — показываем подсказку
