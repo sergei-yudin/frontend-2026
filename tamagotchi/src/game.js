@@ -11,7 +11,15 @@ import readline from 'node:readline/promises';
 // health = 100, hunger = 50, happiness = 50, energy = 50, gold = 0, dead = false
 export function createPet(name) {
   // TODO: создай и верни объект со свойствами питомца
-  throw new Error('createPet не реализована');
+    return {
+        name: String(name),
+        health: 100,
+        hunger: 50,
+        happiness: 50,
+        energy: 50,
+        gold: 0,
+        dead: false,
+    }
 }
 
 // Тема: Свойства объекта — https://learn.javascript.ru/object#svoystva-obekta
@@ -22,7 +30,8 @@ export function createPet(name) {
 // Увеличивает health на 5 (но не выше 100)
 export function feed(pet) {
   // TODO: измени свойства объекта pet
-  throw new Error('feed не реализована');
+    pet.hunger = Math.max(0, pet.hunger - 20);
+    pet.health = Math.min(100, pet.health + 5);
 }
 
 // Тема: Свойства объекта — https://learn.javascript.ru/object#svoystva-obekta
@@ -36,7 +45,17 @@ export function feed(pet) {
 // Если health стало 0 или меньше — питомец умирает (dead = true)
 export function play(pet) {
   // TODO: измени свойства объекта pet, проверь границы и смерть
-  throw new Error('play не реализована');
+    pet.happiness = Math.min(100, pet.happiness + 15);
+    pet.hunger = Math.min(100, pet.hunger + 10);
+    pet.energy = Math.max(0, pet.energy - 10);
+
+    if (pet.hunger >= 100) {
+        pet.health -= 20;
+    }
+    if (pet.health <=0) {
+        pet.dead = true;
+        pet.health = 0;
+    }
 }
 
 // Тема: Свойства объекта — https://learn.javascript.ru/object#svoystva-obekta
@@ -47,7 +66,8 @@ export function play(pet) {
 // Увеличивает hunger на 5 (но не выше 100)
 export function sleep(pet) {
   // TODO: измени свойства объекта pet
-  throw new Error('sleep не реализована');
+    pet.energy = Math.min(100, pet.energy + 30);
+    pet.hunger = Math.min(100, pet.hunger + 5);
 }
 
 // Тема: Шаблонные строки — https://learn.javascript.ru/string#shablonnye-stroki
@@ -56,7 +76,7 @@ export function sleep(pet) {
 // Пример: "Имя: Бобик | Здоровье: 100 | Голод: 50 | Счастье: 50 | Энергия: 50 | Золото: 0 | Жив: да"
 export function checkStatus(pet) {
   // TODO: верни отформатированную строку со статами питомца
-  throw new Error('checkStatus не реализована');
+    return `Имя: ${pet.name} | Здоровье: ${pet.health} | Голод: ${pet.hunger} | Счастье: ${pet.happiness} | Энергия: ${pet.energy} | Золото: ${pet.gold} | Жив: ${pet.dead ? "нет": "да"}`;
 }
 
 // Тема: Циклы while — https://learn.javascript.ru/while-for
